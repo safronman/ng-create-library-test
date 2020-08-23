@@ -2,5 +2,267 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "my-lib": {
+      "projectType": "library",
+      "root": "projects/my-lib",
+      "sourceRoot": "projects/my-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/my-lib/tsconfig.lib.json",
+            "project": "projects/my-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-lib/src/test.ts",
+            "tsConfig": "projects/my-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/my-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-lib/tsconfig.lib.json",
+              "projects/my-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "my-lib-example": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/my-lib-example",
+      "sourceRoot": "projects/my-lib-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/my-lib-example",
+            "index": "projects/my-lib-example/src/index.html",
+            "main": "projects/my-lib-example/src/main.ts",
+            "polyfills": "projects/my-lib-example/src/polyfills.ts",
+            "tsConfig": "projects/my-lib-example/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/my-lib-example/src/favicon.ico",
+              "projects/my-lib-example/src/assets"
+            ],
+            "styles": [
+              "projects/my-lib-example/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/my-lib-example/src/environments/environment.ts",
+                  "with": "projects/my-lib-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-lib-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-lib-example:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-lib-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-lib-example/src/test.ts",
+            "polyfills": "projects/my-lib-example/src/polyfills.ts",
+            "tsConfig": "projects/my-lib-example/tsconfig.spec.json",
+            "karmaConfig": "projects/my-lib-example/karma.conf.js",
+            "assets": [
+              "projects/my-lib-example/src/favicon.ico",
+              "projects/my-lib-example/src/assets"
+            ],
+            "styles": [
+              "projects/my-lib-example/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-lib-example/tsconfig.app.json",
+              "projects/my-lib-example/tsconfig.spec.json",
+              "projects/my-lib-example/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/my-lib-example/e2e/protractor.conf.js",
+            "devServerTarget": "my-lib-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "my-lib-example:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "beatmakers-tv": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/beatmakers-tv",
+      "sourceRoot": "projects/beatmakers-tv/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/beatmakers-tv",
+            "index": "projects/beatmakers-tv/src/index.html",
+            "main": "projects/beatmakers-tv/src/main.ts",
+            "polyfills": "projects/beatmakers-tv/src/polyfills.ts",
+            "tsConfig": "projects/beatmakers-tv/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/beatmakers-tv/src/favicon.ico",
+              "projects/beatmakers-tv/src/assets"
+            ],
+            "styles": [
+              "projects/beatmakers-tv/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/beatmakers-tv/src/environments/environment.ts",
+                  "with": "projects/beatmakers-tv/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "beatmakers-tv:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "beatmakers-tv:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "beatmakers-tv:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/beatmakers-tv/src/test.ts",
+            "polyfills": "projects/beatmakers-tv/src/polyfills.ts",
+            "tsConfig": "projects/beatmakers-tv/tsconfig.spec.json",
+            "karmaConfig": "projects/beatmakers-tv/karma.conf.js",
+            "assets": [
+              "projects/beatmakers-tv/src/favicon.ico",
+              "projects/beatmakers-tv/src/assets"
+            ],
+            "styles": [
+              "projects/beatmakers-tv/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/beatmakers-tv/tsconfig.app.json",
+              "projects/beatmakers-tv/tsconfig.spec.json",
+              "projects/beatmakers-tv/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/beatmakers-tv/e2e/protractor.conf.js",
+            "devServerTarget": "beatmakers-tv:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "beatmakers-tv:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "my-lib"
 }
